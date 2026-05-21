@@ -1,0 +1,88 @@
+from playwright.sync_api import sync_playwright
+import time
+
+SEARCH_QUERY = "SA vs Aus update"
+
+def main():
+    with sync_playwright() as p:
+
+        # Launch browser
+        browser = p.chromium.launch(
+            headless=False,   # False = visible browser
+            slow_mo=500       # Slow actions for visibility
+        )
+
+        page = browser.new_page()
+
+        # Open Google
+        page.goto("https://www.google.com")
+
+        # Accept cookies if popup appears
+        try:
+            page.locator("button:has-text('Accept all')").click(timeout=3000)
+        except:
+            pass
+
+        # Search in Google
+        page.fill("textarea[name='q']", SEARCH_QUERY)
+
+        # Press Enter
+        page.keyboard.press("Enter")
+
+        # Wait for search results
+        page.wait_for_timeout(3000)
+
+        print("\n===== SEARCH RESULTS =====\n")
+
+        # Get top 5 results
+        results = page.locator("h3").all()
+
+        for i, result in enumerate(results[:5], start=1):
+            try:
+                print(f"{i}. {result.inner_text()}")
+            except:
+                pass
+
+        # Click first result
+        print("\nOpening first result...\n")
+
+        results[0].click()
+
+        # Wait for page to load
+        page.wait_for_timeout(5000)
+
+        # Extract page title
+        print("PAGE TITLE:")
+        print(page.title())
+
+        print("\n===== LATEST NEWS CONTENT =====\n")
+
+        # Extract paragraphs
+        paragraphs = page.locator("p").all()
+
+        count = 0
+
+        for para in paragraphs:
+            try:
+                text = para.inner_text().strip()
+
+                if len(text) > 50:
+                    print(text)
+                    print()
+
+                    count += 1
+
+                if count >= 10:
+                    break
+
+            except:
+                pass
+
+        print("\nScript completed successfully!")
+
+        time.sleep(5)
+
+        browser.close()
+
+if __name__ == "__main__":
+    main()

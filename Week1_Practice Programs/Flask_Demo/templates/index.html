@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cricket News Scraper</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 40px auto; padding: 0 20px; }
+        h1 { color: #2c7a2c; }
+        form { display: flex; gap: 10px; margin-bottom: 30px; }
+        input[type="text"] { flex: 1; padding: 10px; font-size: 16px; border: 1px solid #ccc; border-radius: 4px; }
+        button { padding: 10px 20px; background: #2c7a2c; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; }
+        button:hover { background: #1e5e1e; }
+        ul { list-style: none; padding: 0; }
+        li { padding: 12px; margin-bottom: 8px; background: #f4f4f4; border-left: 4px solid #2c7a2c; border-radius: 4px; }
+        .no-results { color: #888; font-style: italic; }
+    </style>
+</head>
+<body>
+    <h1>Cricket News Scraper</h1>
+    <form method="POST">
+        <input type="text" name="query" placeholder="Search cricket news (e.g. IPL, Virat Kohli)" required>
+        <button type="submit">Search</button>
+    </form>
+
+    {% if news %}
+        <h2>Results:</h2>
+        <ul>
+            {% for headline in news %}
+                <li>{{ headline }}</li>
+            {% endfor %}
+        </ul>
+    {% elif request.method == 'POST' %}
+        <p class="no-results">No results found. Try a different search term.</p>
+    {% endif %}
+</body>
+</html>
