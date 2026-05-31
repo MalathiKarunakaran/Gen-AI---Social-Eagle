@@ -1,0 +1,57 @@
+[
+  {
+    "source": "Paris",
+    "relation": "HAS_HIDDEN_GEM",
+    "target": "Mus\u00e9e de la Vie Romantique"
+  },
+  {
+    "source": "Mus\u00e9e de la Vie Romantique",
+    "relation": "LOCATED_AT",
+    "target": "Montmartre"
+  },
+  {
+    "source": "Montmartre",
+    "relation": "KNOWN_FOR",
+    "target": "artistic history"
+  },
+  {
+    "source": "Tokyo",
+    "relation": "OFFERS_VIEW",
+    "target": "Hokutopia Observatory"
+  },
+  {
+    "source": "Hokutopia Observatory",
+    "relation": "SITUATED_IN",
+    "target": "Kita City"
+  },
+  {
+    "source": "Kita City",
+    "relation": "ALLOWS_VIEW",
+    "target": "Shinkansen bullet trains"
+  },
+  {
+    "source": "Rome",
+    "relation": "CONTAINS_SECRET_SPOT",
+    "target": "Aventine Keyhole"
+  },
+  {
+    "source": "Aventine Keyhole",
+    "relation": "BUILT_ON",
+    "target": "Aventine Hill"
+  },
+  {
+    "source": "Aventine Hill",
+    "relation": "OFFERS_VIEW",
+    "target": "St. Peter\u2019s Basilica"
+  },
+  {
+    "source": "premium tier packages",
+    "relation": "INCLUDE",
+    "target": "basic medical travel insurance"
+  },
+  {
+    "source": "basic medical travel insurance",
+    "relation": "COVERS",
+    "target": "$50,000 USD in emergency medical expenses"
+  }
+]

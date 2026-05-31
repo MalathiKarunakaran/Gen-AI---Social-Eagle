@@ -1,0 +1,82 @@
+[
+  {
+    "source": "custom travel packages",
+    "relation": "allow",
+    "target": "1 checked bag (up to 23kg/50lbs) and 1 personal item"
+  },
+  {
+    "source": "extra or overweight bags",
+    "relation": "incur",
+    "target": "$50 USD per flight segment"
+  },
+  {
+    "source": "trips booked through this application",
+    "relation": "can be",
+    "target": "fully refunded if canceled at least 14 days before the departure date"
+  },
+  {
+    "source": "cancellations made inside the 14-day window",
+    "relation": "are",
+    "target": "non-refundable but automatically receive a 50% travel credit voucher valid for 12 months"
+  },
+  {
+    "source": "premium tier packages",
+    "relation": "include",
+    "target": "basic medical travel insurance covering up to $50,000 USD in emergency medical expenses"
+  },
+  {
+    "source": "basic medical travel insurance",
+    "relation": "does not cover",
+    "target": "electronics theft or trip delays"
+  },
+  {
+    "source": "travel agency",
+    "relation": "organizes",
+    "target": "custom vacation packages to top global destinations"
+  },
+  {
+    "source": "Paris",
+    "relation": "features",
+    "target": "Mus\u00e9e de la Vie Romantique"
+  },
+  {
+    "source": "Mus\u00e9e de la Vie Romantique",
+    "relation": "is located at",
+    "target": "the foot of Montmartre"
+  },
+  {
+    "source": "Montmartre",
+    "relation": "is known for",
+    "target": "its artistic history"
+  },
+  {
+    "source": "Tokyo",
+    "relation": "offers",
+    "target": "panoramic view from the Hokutopia Observatory"
+  },
+  {
+    "source": "Hokutopia Observatory",
+    "relation": "is situated in",
+    "target": "Kita City"
+  },
+  {
+    "source": "Kita City",
+    "relation": "allows",
+    "target": "tourists to view passing Shinkansen bullet trains"
+  },
+  {
+    "source": "Rome",
+    "relation": "contains",
+    "target": "Aventine Keyhole"
+  },
+  {
+    "source": "Aventine Keyhole",
+    "relation": "is built on",
+    "target": "Aventine Hill"
+  },
+  {
+    "source": "Aventine Hill",
+    "relation": "offers",
+    "target": "a perfectly framed view of St. Peter\u2019s Basilica dome"
+  }
+]
