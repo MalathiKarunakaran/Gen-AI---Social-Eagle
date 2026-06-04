@@ -1,0 +1,223 @@
+{
+  "name": "MySecond Workflow_DataFlow",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -448,
+        -96
+      ],
+      "id": "a0e10d3d-83ac-42c6-826c-70c3ee29a4e9",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "13da9ef6-fb2f-43ef-bfcd-97defb7b85bb",
+              "name": "users",
+              "value": "[{\"name\" : \"Malathi\", \"age\" : 31, \"city\" : \"Chennai\"}, {\"name\" : \"Gopinath\", \"age\" : 39, \"city\" : \"Bangalore\"}, {\"name\" : \"Geetika\", \"age\" : 11, \"city\" : \"Mumbai\"}, {\"name\" : \"Dharshith\", \"age\" : 5, \"city\" : \"Delhi\"}, {\"name\" : \"Ram\", \"age\" : 15, \"city\" : \"Salem\"} ]",
+              "type": "array"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -240,
+        -96
+      ],
+      "id": "9cdbd429-bd9b-4509-bc34-97c99b14b9f2",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Get input data\nconst inputData = $input.first().json;\n\n// Dynamically find the array field\nconst arrayField = Object.keys(inputData).find(\n  key => Array.isArray(inputData[key])\n);\n\nif (!arrayField) {\n  throw new Error('No array field found in input data');\n}\n\n// Convert each array element into a separate n8n item\nreturn inputData[arrayField].map(item => ({\n  json: item\n}));"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -32,
+        -96
+      ],
+      "id": "3037cf57-4a40-48c0-9912-23fc18dbf7ec",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "batchSize": 5,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        176,
+        -96
+      ],
+      "id": "b04cf0f4-907b-4e27-baed-e28c815b9ef5",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "6aba0366-fa15-4846-a06c-100b8cfa23d1",
+              "leftValue": "={{ $json.age }}",
+              "rightValue": 32,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        384,
+        0
+      ],
+      "id": "4a0ea5f3-0f67-4ba6-9c64-fe6ffc58f0d4",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "eace4c07-9c49-4adf-a367-5c6f852cbe11",
+              "name": "Message",
+              "value": "They are old People",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        592,
+        -96
+      ],
+      "id": "9487f140-1565-485d-9535-32fa59d04a8a",
+      "name": "Old People"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "03ebd2ea-f44d-40d5-90cf-a3afc8f86758",
+              "name": "",
+              "value": "",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        592,
+        96
+      ],
+      "id": "d75be34f-2e36-4e66-b7b0-6e38cde933f1",
+      "name": "Young People"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Old People",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Young People",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "7463b4c2-3bbf-4921-adf1-daebbf2b1f97",
+  "meta": {
+    "instanceId": "a22164082a9728f6e7f958128347cec499a3ab5b84a0a0a00e2965b52627ff0c"
+  },
+  "nodeGroups": [],
+  "id": "AKF5tyAtveqRd3bs",
+  "tags": []
+}
